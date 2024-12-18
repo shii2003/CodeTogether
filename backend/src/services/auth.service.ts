@@ -1,4 +1,5 @@
 import prisma from "../db-prisma/client";
+import { ZodError } from "zod";
 import { AppError } from "../utils/AppError";
 import { comparePasswords, hashPassword } from "../utils/hashPassword";
 import { loginSchema, signupSchema } from "../utils/zodSchemas";
@@ -56,10 +57,19 @@ export const createAccount = async (
 
         return { accessToken, refreshToken };
     } catch (error) {
+        if (error instanceof ZodError) {
+            throw new AppError(
+                error.errors.map((err) => err.message).join(","),
+                400
+            )
+        }
         if (error instanceof AppError) {
             throw error
         }
-        throw new AppError("An error occured while creating the account.", 500)
+        throw new AppError(
+            "An error occured while creating the account.",
+            500
+        )
     }
 };
 
@@ -90,6 +100,12 @@ export const loginUser = async (
 
         return { accessToken, refreshToken }
     } catch (error) {
+        if (error instanceof ZodError) {
+            throw new AppError(
+                error.errors.map((err) => err.message).join(","),
+                400
+            )
+        }
         if (error instanceof AppError) {
             throw error;
         }
