@@ -6,6 +6,7 @@ import cors from "cors";
 import { PORT, APP_ORIGIN } from "./constants/env";
 import authRoutes from "./routes/auth.route"
 import { errorHandler } from "./middlewares/errorHandler";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -15,7 +16,12 @@ app.use(cors({
 }))
 
 app.use(express.json({ limit: "16kb" }));
-app.use(express.urlencoded({ extended: true, limit: "16kb" }))
+app.use(express.urlencoded(
+    {
+        extended: true,
+        limit: "16kb"
+    }));
+app.use(cookieParser());
 
 app.use("/api/auth", authRoutes)
 app.use((
