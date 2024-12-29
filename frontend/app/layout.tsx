@@ -1,7 +1,10 @@
+'use client'
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar/Navbar";
+import store from "@/store";
+import { Provider } from "react-redux";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,14 +16,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "TaskDeck",
-  description: "Organize. Prioritize. Execute.",
-  icons: {
-    icon: "/Logo.svg",
-    apple: "/favicon.png"
-  }
-};
 
 export default function RootLayout({
   children,
@@ -30,12 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiase bg-grainy`}
+        className={`${geistSans.variable} ${geistMono.variable} h-full antialiase bg-grainy`}
       >
+        <Provider store={store}>
+          <main className="h-full flex-grow">
+            {children}
+          </main>
 
-        <main
-          className="flex-grow"
-        >{children}</main>
+        </Provider>
       </body>
     </html>
   );

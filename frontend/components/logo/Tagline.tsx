@@ -19,7 +19,7 @@ const Tagline: React.FC = () => {
             ref={textRef}
             className='p-6 text-4xl sm:text-5xl md:text-6xl font-bold text-center bg-gradient-to-r from-neutral-500 via-indigo-300 to-neutral-500 bg-clip-text text-transparent'
         >
-            Organize. Prioritize. Execute.
+            Build. Share. Collaborate.
         </h1>
     )
 }

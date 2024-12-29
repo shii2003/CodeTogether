@@ -55,7 +55,13 @@ export const createAccount = async (
             data: { refreshToken },
         });
 
-        return { accessToken, refreshToken };
+        const { password: _, refreshToken: __, ...userDetails } = user;
+
+        return {
+            user: userDetails,
+            accessToken,
+            refreshToken
+        };
     } catch (error) {
         if (error instanceof ZodError) {
             throw new AppError(
@@ -98,7 +104,13 @@ export const loginUser = async (
             data: { refreshToken }
         });
 
-        return { accessToken, refreshToken }
+        const { password: _, refreshToken: __, ...userDetails } = user;
+
+        return {
+            user: userDetails,
+            accessToken,
+            refreshToken
+        }
     } catch (error) {
         if (error instanceof ZodError) {
             throw new AppError(

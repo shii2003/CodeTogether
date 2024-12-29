@@ -7,9 +7,12 @@ export default function WorkspaceLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className="flex flex-col justify-center items-center h-screen w-full ">
+        <div className="flex flex-col justify-start items-center h-screen w-full overflow-hidden">
             <Appbar />
-            {children}
+            <div className="flex-1 w-full">
+                {children}
+            </div>
+
         </div>
     )
 }

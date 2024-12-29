@@ -7,7 +7,7 @@ import React from 'react';
 const Appbar: React.FC = () => {
 
     return (
-        <div className='flex  justify-between gap-5 px-4 py-2  border-b border-neutral-800 w-full max-w-7xl'>
+        <div className='flex bg-neutral-800 justify-between gap-5 px-4 py-2  border-b border-neutral-800 w-full max-w-7xl'>
             <div className='flex items-center justify-center text-neutral-400 font-medium rounded-full border-2 border-indigo-400 px-4 py-2 bg-indigo-400 bg-opacity-20 gap-2'>
                 <div className='flex items-center justify-center overflow-y-hidden rounded-full h-5 w-5'>
                     <CgProfile className='text-neutral-300' />

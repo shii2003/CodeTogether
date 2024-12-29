@@ -4,7 +4,7 @@ import { ACCESS_TOKEN_SECRET } from "../constants/env";
 import { AppError } from "../utils/AppError";
 import prisma from "../db-prisma/client";
 
-export interface AutheticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
     user?: {
         id: number;
         username: string;
@@ -17,7 +17,7 @@ interface CustomeJwtPayload extends JwtPayload {
 }
 
 export const verifyAccessTokenMiddleware = async (
-    req: AutheticatedRequest,
+    req: AuthenticatedRequest,
     res: Response,
     next: NextFunction
 ) => {
@@ -48,7 +48,9 @@ export const verifyAccessTokenMiddleware = async (
                 404
             )
         }
-        req.user = user;
+        const { password: _, refreshToken: __, ...userDetails } = user;
+        req.user = userDetails;
+
         next();
     } catch (error) {
         if (error instanceof jwt.JsonWebTokenError) {

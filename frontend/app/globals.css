@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
 body{
   @apply bg-neutral-900 text-white;
 }
@@ -11,3 +16,4 @@ body{
   background-size: cover;
   background-repeat: repeat;
 }
+
