@@ -1,12 +1,16 @@
 import dotenv from "dotenv";
 dotenv.config();
 import { RedisManager } from "./RedisManager";
+import { WebSocketServer } from "./WebSocketServer";
+import { PORT } from "./constants/env";
 
 async function main() {
     const redisManager = RedisManager.getInstance();
     const queueClient = redisManager.getQueueClient();
     const pubsubClient = redisManager.getPubSubClient();
     const queueName = 'roomServiceRequestQueue';
+
+    const webSocketServer = WebSocketServer.getInstance(Number(PORT));
 
     console.log("Room Service started. Waiting for requests...");
 
@@ -16,11 +20,11 @@ async function main() {
                 const result = await queueClient.brPop(queueName, 0);
 
                 if (result) {
-                    //result = [queueName, message]
-                    const { key, element } = result;
-                    console.log(`Received request from queue: ${key}, message: ${element}`);
 
+                    const { key, element } = result;
                     const { clientId, message } = JSON.parse(element);
+
+                    console.log(`Received request from queue: ${key}, message: ${element}`);
 
                     const responseMessage = `Welcome, user with ID: ${message.userId}`;
                     console.log(`Processing request for  client ID: ${clientId}, message: ${message}`);

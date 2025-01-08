@@ -13,7 +13,7 @@ export class RedisManager {
 
         const clientOptions: RedisClientOptions = {
             url: REDIS_CONNECTION_URL,
-            pingInterval: 4 * 60 * 1000, //ping every 4 minutes
+            pingInterval: 1 * 60 * 1000, //ping every 4 minutes
             socket: {
                 keepAlive: 60000,
                 reconnectStrategy: (retries) => {

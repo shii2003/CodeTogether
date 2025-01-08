@@ -11,3 +11,4 @@ const getEnv = (key: string, defaulValue?: string) => {
 };
 
 export const REDIS_CONNECTION_URL = getEnv("REDIS_CONNECTION_URL");
+export const PORT = getEnv("PORT", "8080");
